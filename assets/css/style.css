@@ -1,0 +1,9 @@
+/*
+ * Arquivo CSS Principal - Portfólio Amizael Reis Silva
+ * Inspirado na estrutura modular e moderna com paleta Dark Mode e realces em ciano
+*/
+
+@import url('base.css');
+@import url('layout.css');
+@import url('components.css');
+@import url('pages.css');

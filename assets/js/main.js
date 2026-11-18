@@ -1,73 +1,211 @@
+document.addEventListener('DOMContentLoaded', function() {
 
-function updateProfileInfo(profileData) {
-    const photo = document.getElementById('profile.photo')
-    photo.src = profileData.photo
-    photo.alt = profileData.name
+    // Gerenciador de Tema (Dark / Light Mode)
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    let savedTheme = 'dark';
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        savedTheme = urlParams.get('theme') || localStorage.getItem('theme') || 'dark';
+    } catch (e) {
+        savedTheme = 'dark';
+    }
 
-    const name = document.getElementById('profile.name')
-    name.innerText = profileData.name
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        if (themeToggleBtn) {
+            themeToggleBtn.setAttribute('title', 'Mudar para tema escuro');
+        }
+    } else {
+        document.body.classList.remove('light-mode');
+        if (themeToggleBtn) {
+            themeToggleBtn.setAttribute('title', 'Mudar para tema claro');
+        }
+    }
 
-    const job = document.getElementById('profile.job')
-    job.innerText = profileData.job
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            try {
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            } catch (err) {}
+            themeToggleBtn.setAttribute('title', isLight ? 'Mudar para tema escuro' : 'Mudar para tema claro');
+        });
+    }
 
-    const location = document.getElementById('profile.location')
-    location.innerText = profileData.location
+    // Configuração do Menu Mobile
+    const menuToggleButton = document.querySelector('.menu-toggle');
+    const menuPrincipal = document.querySelector('.menu-principal');
+    const menuLinks = document.querySelectorAll('.menu-principal a');
 
-    const phone = document.getElementById('profile.phone')
-    phone.innerText = profileData.phone
-    phone.href = `tel:${profileData.phone}`
+    if (menuToggleButton && menuPrincipal) {
+        // Abrir/Fechar menu
+        menuToggleButton.addEventListener('click', function() {
+            menuPrincipal.classList.toggle('menu-open');
+            menuToggleButton.classList.toggle('active');
+        });
 
-    const email = document.getElementById('profile.email')
-    email.innerText = profileData.email
-    email.href = `mailto:${profileData.email}`
-}
+        // Fechar menu ao clicar no link
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuPrincipal.classList.remove('menu-open');
+                menuToggleButton.classList.remove('active');
+            });
+        });
+    }
 
-function updateSoftSkills(profileData) {
-    const softSkills = document.getElementById('profile.skills.softSkills')
-    softSkills.innerHTML = profileData.skills.softSkills.map(skill => `<li>${skill}</li>`).join('')
-}
+    // Scroll Spy (Navegação Ativa Inteligente)
+    const navLinks = document.querySelectorAll('.menu-principal a[href^="#"]');
+    
+    function scrollActive() {
+        const scrollY = window.pageYOffset;
 
-function updateHardSkills(profileData) {
-    const hardSkills = document.getElementById('profile.skills.hardSkills')
-    hardSkills.innerHTML = profileData.skills.hardSkills.map(skill => `<li><img src="${skill.logo}" alt="${skill.name}" title="${skill.name}"></li>`).join('')
-}
+        const linkedSections = Array.from(navLinks)
+            .map(link => {
+                const id = link.getAttribute('href').replace('#', '');
+                const section = document.getElementById(id);
+                return section ? { id, top: section.offsetTop - 150 } : null;
+            })
+            .filter(item => item)
+            .sort((a, b) => a.top - b.top);
+        
+        if (!linkedSections.length) return;
 
-function updateLanguages(profileData) {
-    const languages = document.getElementById('profile.languages')
-    languages.innerHTML = profileData.languages.map(language => `<li>${language}</li>`).join('')
-}
+        let activeSectionId = linkedSections[0].id;
 
-function updatePortfolio(profileData) {
-    const portfolio = document.getElementById('profile.portfolio')
-    portfolio.innerHTML = profileData.portfolio.map(project => {
-        return `
-            <li>
-                <h3 ${project.github ? 'class="github"' : ''}>${project.name}</h3>
-                <a href="${project.url}" target="_blank">${project.url}</a>
-            </li>
-        `
-    }).join('')
-}
+        linkedSections.forEach(section => {
+            if (scrollY >= section.top) {
+                activeSectionId = section.id;
+            }
+        });
 
-function updateProfessionalExperience(profileData) {
-    const professionalExperience = document.getElementById('profile.professionalExperience')
-    professionalExperience.innerHTML = profileData.professionalExperience.map(experience => {
-        return `
-            <li>
-                <h3 class="title">${experience.name}</h3>
-                <p class="period">${experience.period}</p>
-                <p>${experience.description}</p>
-            </li>
-        `
-    }).join('')
-}
+        navLinks.forEach(a => a.classList.remove('active'));
 
-(async () => {
-    const profileData = await fetchProfileData()
-    updateProfileInfo(profileData)
-    updateSoftSkills(profileData)
-    updateHardSkills(profileData)
-    updateLanguages(profileData)
-    updatePortfolio(profileData)
-    updateProfessionalExperience(profileData)
-})()
+        const menuLink = document.querySelector('.menu-principal a[href="#' + activeSectionId + '"]');
+        if (menuLink) menuLink.classList.add('active');
+    }
+
+    window.addEventListener('scroll', scrollActive);
+    scrollActive();
+
+    // Modal de Mensagens
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const modalStatus = document.getElementById('modal-status');
+    const modalMessage = document.getElementById('modal-message');
+    const modalCloseButton = document.getElementById('modal-close');
+    let autoCloseTimer;
+
+    function showModal(message, type = 'success') {
+        if (!modalStatus || !modalBackdrop) {
+            alert(message);
+            return;
+        }
+
+        clearTimeout(autoCloseTimer);
+        modalMessage.textContent = message;
+        
+        modalStatus.classList.remove('success', 'error');
+        modalStatus.classList.add(type);
+
+        modalBackdrop.classList.add('show');
+        modalStatus.classList.add('show');
+
+        autoCloseTimer = setTimeout(hideModal, 4500);
+    }
+
+    function hideModal() {
+        clearTimeout(autoCloseTimer);
+        if (modalBackdrop && modalStatus) {
+            modalBackdrop.classList.remove('show');
+            modalStatus.classList.remove('show');
+        }
+    }
+
+    if (modalCloseButton) modalCloseButton.addEventListener('click', hideModal); 
+    if (modalBackdrop) modalBackdrop.addEventListener('click', hideModal); 
+
+    // Formulário de Contato
+    const contactForm = document.getElementById('form-contato');
+    
+    if (contactForm) {
+        const submitButton = contactForm.querySelector('.submit-button');
+
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const nomeInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const mensagemInput = document.getElementById('message');
+
+            const nome = nomeInput ? nomeInput.value.trim() : '';
+            const email = emailInput ? emailInput.value.trim() : '';
+            const mensagem = mensagemInput ? mensagemInput.value.trim() : '';
+
+            if (nome === '' || email === '' || mensagem === '') {
+                showModal('Por favor, preencha todos os campos!', 'error');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showModal('Por favor, insira um e-mail válido.', 'error');
+                return;
+            }
+
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+
+            const actionUrl = contactForm.getAttribute('action');
+
+            // Se houver um endpoint configurado (ex: Formspree com ID válido)
+            if (actionUrl && actionUrl.includes('formspree.io/f/') && !actionUrl.includes('SEU_ID')) {
+                const formData = new FormData(contactForm);
+
+                fetch(actionUrl, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(async response => {
+                    if (response.ok) {
+                        showModal(`Obrigado, ${nome}! Sua mensagem foi enviada com sucesso! Entrarei em contato em breve.`, 'success');
+                        contactForm.reset();
+                    } else {
+                        const data = await response.json().catch(() => null);
+                        if (data && data.errors && data.errors.length > 0) {
+                            const errorMsg = data.errors.map(err => err.message).join(', ');
+                            showModal(`Erro: ${errorMsg}`, 'error');
+                        } else {
+                            abrirClienteEmail(nome, email, mensagem);
+                        }
+                    }
+                })
+                .catch(() => {
+                    abrirClienteEmail(nome, email, mensagem);
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                });
+            } else {
+                abrirClienteEmail(nome, email, mensagem);
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
+        });
+    }
+
+    function abrirClienteEmail(nome, email, mensagem) {
+        const assunto = encodeURIComponent(`Contato pelo Portfólio - ${nome}`);
+        const corpo = encodeURIComponent(`Olá Amizael,\n\n${mensagem}\n\n---\nRemetente: ${nome}\nE-mail para resposta: ${email}`);
+        const mailtoLink = `mailto:sr.amizael@gmail.com?subject=${assunto}&body=${corpo}`;
+        
+        window.location.href = mailtoLink;
+        showModal(`Obrigado, ${nome}! O seu aplicativo de e-mail foi aberto com os dados preenchidos para envio direto a sr.amizael@gmail.com`, 'success');
+        if (contactForm) contactForm.reset();
+    }
+});

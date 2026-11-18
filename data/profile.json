@@ -1,48 +1,171 @@
 {
-  "name": "Amizael Reis",
+  "name": "Amizael Reis Silva",
   "photo": "https://avatars.githubusercontent.com/u/90802917?v=4",
-  "job": "Estudante - Ciências da computação - 5 periodo",
-  "location": "RO",
-  "phone": "(99) 9999-9999",
+  "job": "Desenvolvedor de Software | Automação, Fullstack & IA Generativa",
+  "location": "Porto Velho, RO",
+  "phone": "(69) 98484-4966",
   "email": "sr.amizael@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/amizael-silva",
+  "github": "https://github.com/Amizael",
+  "summary": "Estudante de Ciência da Computação (8º período) e estagiário de desenvolvimento na SMTI de Porto Velho, atuando como desenvolvedor principal do Sistema de Solicitação de Sinalização de Trânsito integrado ao PVH+. Experiência prática em sistemas web (PHP, Laravel, React, TypeScript, Node.js) e ferramentas desktop com automação, agentes e preparação de contexto para LLMs (Gemini, OpenAI e CrewAI). Busco atuar com engenharia de software, automação e IA generativa no desenvolvimento de soluções escaláveis.",
   "skills": {
-    "hardSkills": [
+    "development": [
       {
-        "name": "HTML5",
-        "logo": "https://raw.githubusercontent.com/Amizael/js-developer-portfolio/refs/heads/main/data/imgs/html.png"
+        "name": "PHP",
+        "logo": "data/imgs/php.png"
+      },
+      {
+        "name": "Laravel",
+        "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-original.svg"
+      },
+      {
+        "name": "Python",
+        "logo": "data/imgs/python.png"
+      },
+      {
+        "name": "JavaScript",
+        "logo": "data/imgs/js.png"
+      },
+      {
+        "name": "TypeScript",
+        "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg"
+      },
+      {
+        "name": "Node.js",
+        "logo": "data/imgs/nodejs.png"
+      },
+      {
+        "name": "React",
+        "logo": "data/imgs/react.png"
       },
       {
         "name": "Java",
-        "logo": "https://raw.githubusercontent.com/Amizael/js-developer-portfolio/refs/heads/main/data/imgs/java.png"
+        "logo": "data/imgs/java.png"
+      },
+      {
+        "name": "HTML5",
+        "logo": "data/imgs/html.png"
+      },
+      {
+        "name": "CSS3",
+        "logo": "data/imgs/css.png"
+      }
+    ],
+    "ai_automation": [
+      "CrewAI (Orquestração de Agentes)",
+      "APIs de LLMs (Google Gemini & OpenAI)",
+      "Engenharia de Contexto para LLMs",
+      "Otimização de Tokens",
+      "Diagnóstico Estático via AST & Validação de .env"
+    ],
+    "data_infra": [
+      {
+        "name": "PostgreSQL",
+        "logo": "data/imgs/postgresql.png"
+      },
+      {
+        "name": "MySQL",
+        "logo": "data/imgs/mysql.png"
+      },
+      {
+        "name": "Firebase",
+        "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/firebase/firebase-plain.svg"
+      },
+      {
+        "name": "Docker",
+        "logo": "data/imgs/docker.png"
+      },
+      {
+        "name": "Linux (Ubuntu)",
+        "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg"
+      },
+      {
+        "name": "Git",
+        "logo": "data/imgs/git.png"
+      },
+      {
+        "name": "GitHub",
+        "logo": "data/imgs/github.png"
       }
     ],
     "softSkills": [
-      "Empatia",
-      "Trabalho em equipe",
-      "Organização"
+      "Resolução de Problemas Complexos",
+      "Trabalho em Equipe e Colaboração",
+      "Comunicação Clara e Objetiva",
+      "Proatividade e Autonomia",
+      "Adaptabilidade a Novas Tecnologias",
+      "Comprometimento com Qualidade e Prazos"
     ]
   },
-  "languages": [
-    "Português BR",
-    "Inglês (intermediário)"
-  ],
   "portfolio": [
     {
-      "name": "Curso Ministrado na DIO para a criação de uma Pokedex",
-      "url": "https://github.com/Amizael/Desafio-pokedex.git",
-      "github": true
-    },
-    {
-      "name": "Curso Ministrado na DIO para a criação de uma página de portfolio",
-      "url": "https://github.com/Amizael/js-developer-portfolio.git",
-      "github": true
+      "name": "Dev Automation Kit",
+      "role": "Co-criador e Desenvolvedor",
+      "description": "Ferramenta desktop multiplataforma (Windows e Linux) para preparação de repositórios de código voltados a LLMs (Gemini e OpenAI). Separação estrutural por papéis técnicos, otimização de tokens e diagnóstico local de código via AST e validação de .env.",
+      "url": "https://dev-automation-kit.github.io/dev-automation-kit-web/",
+      "githubUrl": "https://github.com/Dev-Automation-Kit/dev-automation-kit-web",
+      "tags": [
+        "Electron",
+        "Node.js",
+        "Integração IA",
+        "AST",
+        "OpenAI & Gemini API"
+      ],
+      "image": "assets/img/projetos/devautomationkit.png"
     }
   ],
   "professionalExperience": [
     {
-      "name": "Estudante - Ensino superior",
-      "period": "2022 - até o momento",
-      "description": "Zero experiencia proficional"
+      "name": "Estagiário em Desenvolvimento de Software (Setor DESIS)",
+      "company": "Superintendência Municipal de Tecnologia da Informação (SMTI) - Porto Velho",
+      "period": "Mai 2026 – Atual",
+      "description": "Atuação como desenvolvedor principal do Sistema de Solicitação de Sinalização de Trânsito para a Prefeitura de Porto Velho, integrado à plataforma municipal PVH+. Construção do back-end e regras de negócio em PHP e Laravel para abertura, acompanhamento e gestão de protocolos urbanos. Modelagem de banco de dados relacional e implementação de interfaces responsivas para cidadãos e gestores."
+    },
+    {
+      "name": "Desenvolvedor de Software (Freelancer)",
+      "company": "Aplicativo de Gestão de Feiras e Empreendedores | Porto Velho, RO",
+      "period": "Freelancer",
+      "description": "Desenvolvimento de aplicação para gestão de feirantes, estruturando cadastros por feiras, categorias e segmentos de atuação. Implementação de controle financeiro mensal por feira e feirante, automatizando o acompanhamento de pagamentos e adimplência."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Centro Universitário Estácio",
+      "degree": "Bacharelado em Ciência da Computação",
+      "period": "Cursando 8º Período (Previsão de conclusão: Jul/2027)",
+      "description": "Formação acadêmica com foco em computação, algoritmos, estrutura de dados, arquitetura de software e sistemas de informação."
+    }
+  ],
+  "certifications": [
+    {
+      "category": "IA, Arquitetura & Sistemas",
+      "courses": [
+        "CrewAI Fundamentals",
+        "Concepção de Algoritmos Eficientes, Estáveis e Escaláveis",
+        "Programação de Sistemas de Informação",
+        "Gerência, Organização e Recuperação das Informações"
+      ]
+    },
+    {
+      "category": "Desenvolvimento & Infraestrutura",
+      "courses": [
+        "Estrutura de Dados e Java Básico/Intermediário (Loiane.training)",
+        "Formação JavaScript Developer (DIO.me)",
+        "Formação HTML Web Developer (DIO.me)",
+        "Formação Linux Fundamentals (DIO.me)",
+        "Formação Lógica de Programação (DIO.me)",
+        "Conexão Comunitária e Prática Transformadora"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "Português",
+      "level": "Nativo"
+    },
+    {
+      "language": "Inglês",
+      "level": "Intermediário para leitura técnica; Básico para compreensão e conversação"
     }
   ]
 }
